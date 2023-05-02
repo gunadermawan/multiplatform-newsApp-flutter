@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/model/article.dart';
 
+import 'detail_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,6 +20,11 @@ class MyApp extends StatelessWidget {
       initialRoute: NewsListPage.routeName,
       routes: {
         NewsListPage.routeName: (context) => const NewsListPage(),
+        ArticleDetailPage.routeName: (context) => ArticleDetailPage(
+              article: ModalRoute.of(context)?.settings.arguments as Article,
+            ),
+        ArticleWebview.routeName: (context) => ArticleWebview(
+            url: ModalRoute.of(context)?.settings.arguments as String)
       },
     );
   }
@@ -60,6 +67,10 @@ class NewsListPage extends StatelessWidget {
       ),
       title: Text(article.title),
       subtitle: Text(article.author),
+      onTap: () {
+        Navigator.pushNamed(context, ArticleDetailPage.routeName,
+            arguments: article);
+      },
     );
   }
 }
