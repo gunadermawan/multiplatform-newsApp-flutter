@@ -16,4 +16,13 @@ class Article {
     required this.publishedAt,
     required this.content,
   });
+
+  factory Article.fromJson(Map<String, dynamic> article) => Article(
+      author: article['author'],
+      title: article['title'],
+      description: article['description'],
+      url: article['url'],
+      urlToImage: article['urlToImage'],
+      publishedAt: article['publishedAt'],
+      content: article['content']);
 }
